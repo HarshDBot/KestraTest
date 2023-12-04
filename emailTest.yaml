@@ -1,0 +1,24 @@
+id: emailAlert
+namespace: dev
+
+listeners:
+  - conditions:
+      - type: io.kestra.core.models.conditions.types.ExecutionStatusCondition
+        in:
+          - FAILED
+    tasks:
+      - id: email
+        type: io.kestra.plugin.notifications.mail.MailExecution
+        to: neolinkkestra@gmail.com
+        from: neolinkkestra@gmail.com
+        subject: This is the subject
+        host: smtp.gmail.com
+        port: 587
+        username: neolinkkestra@gmail.com
+        password: aajmwncqjlvmnusu
+        sessionTimeout: 1000
+        transportStrategy: SMTP_TLS
+
+tasks:
+  - id: alwaysFail
+    type: io.kestra.core.tasks.executions.Fail
